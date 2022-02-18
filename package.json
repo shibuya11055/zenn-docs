@@ -1,0 +1,28 @@
+{
+  "name": "zenn-docs",
+  "version": "1.0.0",
+  "description": "* [📘 How to use](https://zenn.dev/zenn/articles/zenn-cli-guide)",
+  "main": "index.js",
+  "dependencies": {
+    "textlint": "^12.1.0",
+    "textlint-rule-preset-ja-technical-writing": "^7.0.0",
+    "textlint-rule-no-todo": "^2.0.1",
+    "textlint-rule-preset-smarthr": "^1.11.1",
+    "textlint-rule-prh": "^5.3.0",
+    "zenn-cli": "^0.1.107"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shibuya11055/zenn-docs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shibuya11055/zenn-docs/issues"
+  },
+  "homepage": "https://github.com/shibuya11055/zenn-docs#readme"
+}
