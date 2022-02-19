@@ -5,8 +5,8 @@
     },
     "prh": {
       "rulePaths": [
-        "./dict/fukushi.yml",
-        "./dict/prh-idiomatic-usage.yml"
+        "dict/fukushi.yml",
+        "dict/prh-idiomatic-usage.yml"
       ]
     }
   }
