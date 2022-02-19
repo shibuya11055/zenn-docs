@@ -5,8 +5,8 @@
     },
     "prh": {
       "rulePaths": [
-        "dict/smarthr-prh-basic.yml",
-        "dict/smarthr-prh-tech-word.yml"
+        "dict/fukushi.yml",
+        "dict/prh-idiomatic-usage.yml"
       ]
     }
   }

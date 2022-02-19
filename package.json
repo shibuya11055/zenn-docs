@@ -5,13 +5,15 @@
   "main": "index.js",
   "dependencies": {
     "textlint": "^12.1.0",
-    "textlint-rule-preset-ja-technical-writing": "^7.0.0",
     "textlint-rule-no-todo": "^2.0.1",
+    "textlint-rule-preset-ja-technical-writing": "^7.0.0",
     "textlint-rule-preset-smarthr": "^1.11.1",
     "textlint-rule-prh": "^5.3.0",
     "zenn-cli": "^0.1.107"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "textlint-rule-preset-ja-spacing": "^2.2.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
