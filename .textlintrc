@@ -2,6 +2,12 @@
   "rules": {
     "preset-smarthr":{
       "sentence-length": false
+    },
+    "prh": {
+      "rulePaths": [
+        "./dict/fukushi.yml",
+        "./dict/prh-idiomatic-usage.yml"
+      ]
     }
   }
 }
