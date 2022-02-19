@@ -1,0 +1,13 @@
+{
+  "rules": {
+    "preset-smarthr":{
+      "sentence-length": false
+    },
+    "prh": {
+      "rulePaths": [
+        "./dict/hukushi.yml",
+        "./dict/prh-idiomatic-usage.yml"
+      ]
+    }
+  }
+}
