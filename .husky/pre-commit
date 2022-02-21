@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn lint-staged
+# commit時に動作させたいときにコメントを外す
+# yarn lint-staged

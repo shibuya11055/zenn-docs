@@ -1,15 +1,13 @@
 エンジニアにとって記事を書くということは日常茶飯事だと思うのですが、みなさまはどのように管理されているでしょうか。  
 私はmarkdownエディタ（Obsidian）で下書きし、それをブラウザ上のエディタにコピペして投稿していました。  
 特に不便に感じてはいませんでしたが、先日同僚のテックリードと雑談したところ、  
-  
 「自分はZenn cliを使っていて、自動で投稿されるようにしています。」  
-「Github Actionsでtextlintを走らせて、自動で文章の校正をしています」
-
+「Github Actionsでtextlintを走らせて、自動で文章の校正をしています。」
 というお話をいただきました。  
-なにそれイケてる！！と思いすぐにその環境を導入した話です。
+なにそれイケてる!!と思いすぐにその環境を導入した話です。
 
 # Zennとはてなブログの使い分け
-技術的な話以外のことを書きたい時ははてなブログを利用しています。  
+技術的な話以外のことを書きたいときははてなブログを利用しています。  
 そのためどうせならどちらも管理したいな..というのを目指しましたが、結局はてなブログに関してはvscodeの拡張に頼ることにしました。
 
 # ZennをGithubで管理する
@@ -30,16 +28,16 @@
 7. 自動でZennに投稿される
 ```
 ## Zenn CLIの導入とGithub連携
-Zennには`Zenn CLI`が用意されており、ローカルで作成・編集・プレビューを行うことができます。
+Zennには`Zenn CLI`が用意されており、ローカルで作成・編集・プレビューを行なうことができます。
 さらにGithubと連携することでmainブランチ（設定可）に差分があると自動で投稿してくれます。  
 [Zenn CLI](https://zenn.dev/zenn/articles/install-zenn-cli)  
 [Github連携](https://zenn.dev/zenn/articles/connect-to-github)
 
-コマンドでファイル名にハッシュを含む新しい記事を生成したり、
+コマンドでファイル名にハッシュを含む新しい記事を生成。
 ```
 npx zenn new:article
 ```
-Zennでどう見えるのかをローカル環境で確認することができます。
+Zennでどう見えるのかをローカル環境で確認できます。
 ```
 npx zenn new:article
 ```
@@ -50,7 +48,8 @@ npx zenn new:article
 細かく校正のルールを設定できるのですが、SmartHRがプリセットのnpmパッケージを出しており、なんかよさそうだ！と思ったのでこちらを使用しました。  
 https://www.npmjs.com/package/textlint-rule-preset-smarthr
 
-またtextlintは`textlint-rule-prh`という表記揺れを防ぐ設定を行うこともできます。こちらもSmartHRで用意されているものを使用しました。  
+またtextlintは`textlint-rule-prh`という表記揺れを防ぐ設定を行なうこともできます。  
+こちらもSmartHRで用意されているものを使用しました。  
 https://github.com/kufu/textlint-rule-preset-smarthr/tree/main/dict
 
 ## reviewdogを使う
@@ -78,6 +77,7 @@ published: false # <-これ
 ---
 ```
 
+
 ## vscodeの拡張
 Zenn Editorという拡張も導入しました。
 書きながらとなりにプレビューを置けるので非常に便利です。
@@ -90,12 +90,14 @@ https://github.com/mm0202/push-to-hatenablog
 ただ`Docker`を利用する必要がありそうで、そこまででもないんだよな〜という感じがありました。
 
 ## vscodeの拡張でpostできる
-`hatenablogger`という拡張があり、これを使うことでvscode上から投稿することができるとのこと！
+`hatenablogger`という拡張があり、これを使うことでvscode上から投稿できるとのこと！
 設定もお手軽なのでこちらを利用することにしました。
 https://uraway.hatenablog.com/entry/2018/12/12/001545
 
 ## textlintをpre-commitで実行する
-ただこの場合、Zennと投稿までの流れが変わります。
+**(こちらの項で設定しているhuskyはreviewdogの良さを消してしまうため使用しないことにしました。もし使ってみたい方がいれば参考にしてみてください。)**
+
+はてなブログの場合、Zennと投稿までの流れが変わります。
 ```
 1. ブランチを切る
 
@@ -127,12 +129,14 @@ package.json
 `articles/*.md`はzenn、`hatena/*.md`がはてなブログの記事です。
 ```json
  "scripts": {
-   "lint": "textlint -f checkstyle 'articles/*.md', 'hatena/*.md'",
+   "lint": "textlint 'articles/*.md', 'hatena/*.md'",
+   "lint:fix": "textlint --fix 'articles/*.md', 'hatena/*.md'",
    "prepare": "husky install"
  },
  "lint-staged": {
    "*.{md}": [
      "yarn lint"
+     "yarn lint:fix"
    ]
  }
 ```
@@ -142,25 +146,49 @@ package.json
 yarn husky add .husky/pre-commit "yarn lint-staged"
 ```
 
-これでcommit時にtextlintが実行されるようになりました。
+これでcommit時にtextlintが実行されるようになりました。  
+ちなみにこの記事を書き終えたときに実行されたものです。  
+めちゃくちゃ怒ってくれます🙏
 ```
-git commit 'test-commit'
-
 yarn run v1.22.4
-$ /zenn-docs/node_modules/.bin/lint-staged
+$ /Users/shibuya.kyohei/work2/zenn-docs/node_modules/.bin/lint-staged
 ✔ Preparing lint-staged...
 ⚠ Running tasks for staged files...
- ❯ package.json — 1 file
-   ❯ *.md — 1 file
-     ✖ yarn lint [FAILED]
+  ❯ package.json — 2 files
+    ❯ *.md — 1 file
+      ✖ yarn lint [FAILED]
 ↓ Skipped because of errors from tasks. [SKIPPED]
 ✔ Reverting to original state because of errors...
 ✔ Cleaning up temporary files...
 
 ✖ yarn lint:
 error Command failed with exit code 1.
-$ textlint -f checkstyle 'articles/*.md', 'hatena/*.md' /Users/shibuya.kyohei/work2/zenn-docs/hatena/test.md
-<?xml version="1.0" encoding="utf-8"?><checkstyle version="4.3"><file name="/Users/shibuya.kyohei/work2/zenn-docs/hatena/test.md"><error line="8" column="3" severity="error" message="文末が&quot;。&quot;で終わっていません。 (smarthr/ja-no-mixed-period)" source="eslint.rules.smarthr/ja-no-mixed-period" /></file></checkstyle>
+$ textlint 'articles/*.md', 'hatena/*.md' /Users/shibuya.kyohei/work2/zenn-docs/hatena/management_article_by_github.md
+
+/Users/shibuya.kyohei/work2/zenn-docs/hatena/management_article_by_github.md
+    3:38  error    文末が"。"で終わっていません。                                                                              smarthr/ja-no-mixed-period
+    9:9   ✓ error  ！！ => !!                                                                                                  smarthr/prh-rules
+   12:16  ✓ error  ひらがなで表記したほうが読みやすい形式名詞: 時 => とき                                                      smarthr/ja-keishikimeishi
+   33:43  ✓ error  行う => 行なう
+「行なう」を使用する                                                                                        smarthr/prh-rules
+   38:30  error    文末が"。"で終わっていません。                                                                              smarthr/ja-no-mixed-period
+   42:23  ✓ error  【dict2】 "することができます"は冗長な表現です。"することが"を省き簡潔な表現にすると文章が明瞭になります。
+解説: https://github.com/textlint-ja/textlint-rule-ja-no-redundant-expression#dict2  smarthr/ja-no-redundant-expression
+   53:41  error    【dict5】 "設定を行う"は冗長な表現です。"設定する"など簡潔な表現にすると文章が明瞭になります。
+解説: https://github.com/textlint-ja/textlint-rule-ja-no-redundant-expression#dict5              smarthr/ja-no-redundant-expression
+   53:44  ✓ error  行う => 行なう
+「行なう」を使用する                                                                                        smarthr/prh-rules
+   65:18  error    文末が"。"で終わっていません。                                                                              smarthr/ja-no-mixed-period
+   94:44  ✓ error  【dict2】 "することができると"は冗長な表現です。"することが"を省き簡潔な表現にすると文章が明瞭になります。
+解説: https://github.com/textlint-ja/textlint-rule-ja-no-redundant-expression#dict2  smarthr/ja-no-redundant-expression
+  118:11  error    文末が"。"で終わっていません。                                                                              smarthr/ja-no-mixed-period
+  122:14  error    文末が"。"で終わっていません。                                                                              smarthr/ja-no-mixed-period
+  141:20  error    文末が"。"で終わっていません。                                                                              smarthr/ja-no-mixed-period
+
+✖ 13 problems (13 errors, 0 warnings)
+✓ 6 fixable problems.
+Try to run: $ textlint --fix [file]
+
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 error Command failed with exit code 1.
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
@@ -168,6 +196,11 @@ husky - pre-commit hook exited with code 1 (error)
 ```
 
 修正してcommitが通れば、あとはコマンドパレットから`Hatenablogger: Post or Update`を選択して投稿します。
+
+ちなみにこのエラー文は好きなように変更することができ、下記のようにするとさらに指摘箇所が見やすくなります。
+```
+textlint -f pretty-error 'articles/*.md', 'hatena/*.md'
+```
 
 ## git管理する意味ある？という懸念
 vscodeで完結するのでgit管理する意味がないように一瞬思いました。
