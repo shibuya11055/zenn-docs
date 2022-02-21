@@ -44,6 +44,7 @@ jobs:
 
       - name: Execute textlint for articles
         run: |
+          npx textlint -f checkstyle "articles/*.md" >> .textlint.log
           npx textlint -f checkstyle "hatena/*.md" >> .textlint.log
 
       - name: Run reviewdog
