@@ -58,7 +58,7 @@ https://github.com/reviewdog/reviewdog
 まずはテストで「。」がない文章を投稿してみます。
 すると
 ![reviewdog](https://cdn-ak.f.st-hatena.com/images/fotolife/s/shibuya01055/20220220/20220220234334.png)
-しっかり自動でレビューが入りました。👏
+しっかり自動でレビューが入りました。
 
 これを修正してマージすると・・・
 ![自動投稿](https://cdn-ak.f.st-hatena.com/images/fotolife/s/shibuya01055/20220220/20220220234551.png)
@@ -143,7 +143,7 @@ yarn husky add .husky/pre-commit "yarn lint-staged"
 
 これでcommit時にtextlintが実行されるようになりました。  
 ちなみにこの記事を書き終えたときに実行されたものです。  
-めちゃくちゃ怒ってくれます。🙏
+めちゃくちゃ怒ってくれました。
 ```
 yarn run v1.22.4
 $ /Users/shibuya.kyohei/work2/zenn-docs/node_modules/.bin/lint-staged
@@ -223,6 +223,6 @@ markdownの記事はもちろん以前からvscodeで書けましたが、特に
 あとGithubに草も生えるしなんかいいよね。
 
 # 追記
-最終的にlinterの実行はhuskyを使わずに全てreviewdogに任せることにしました。  
-自動でレビューされた内容をvscodeの拡張、[GitHub Pull Requests and Issues](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)を使って修正時に怒られている箇所を特定しやすくしています（画像は修正して「。」を入れた後）。
+最終的にlinterの実行はhuskyを使わずにすべてreviewdogに任せることにしました。  
+自動でレビューされた内容をvscodeの拡張、[GitHub Pull Requests and Issues](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)を使って修正時に怒られている箇所を特定しやすくしています。
 ![スクリーンショット 2022-02-21 15.27.59.png](https://cdn-ak.f.st-hatena.com/images/fotolife/s/shibuya01055/20220221/20220221153925.png)
