@@ -42,9 +42,9 @@ jobs:
       - name: Install dependent module
         run: npm install
 
-      - name: Execute textlint for ブログ記事
+      - name: Execute textlint for articles
         run: |
-          npx textlint -f checkstyle "articles/*.md" >> .textlint.log
+          npx textlint -f checkstyle {"articles/*.md", "hatena/*.md"} >> .textlint.log
 
       - name: Run reviewdog
         # textlintで文章上のミスがあった場合のみ、reviewdogを実行させるようにする
