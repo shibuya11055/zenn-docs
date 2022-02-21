@@ -1,9 +1,14 @@
+<!--
+{"id":"13574176438065760371","title":"ZennとはてなブログをGit管理することにした","categories":["tech"],"updated":"2022-02-21T18:13:54+09:00","edited":"2022-02-21T18:14:12+09:00","draft":"no"}
+-->
+
 エンジニアにとって記事を書くということは日常茶飯事だと思うのですが、みなさまはどのように管理されているでしょうか。  
-私はmarkdownエディタ（Obsidian）で下書きし、それをブラウザ上のエディタにコピペして投稿していました。  
-特に不便に感じてはいませんでしたが、先日同僚のテックリードと雑談したところ、  
-「自分はZenn cliを使っていて、自動で投稿されるようにしています。」  
-「Github Actionsでtextlintを走らせて、自動で文章の校正をしています。」
-というお話をいただき、なにそれイケてる!!と思いすぐにその環境を導入した話です。
+私はmarkdownエディタ（Obsidian）で下書きし、ブラウザ上のエディタにコピペして投稿していました。  
+先日同僚のテックリードと雑談したところこんなお言葉をいただきました。
+>「自分はZenn cliを使っていて、自動で投稿されるようにしています。」  
+「Github Actionsでtextlintを走らせて、自動で文章の校正をしています。」  
+
+なにそれイケてる!!と思いその環境を導入した話です。
 # Zennとはてなブログの使い分け
 技術的な話以外のことを書きたいときははてなブログを利用しています。  
 そのためどうせならどちらも管理したいな..というのを目指しましたが、結局はてなブログに関してはvscodeの拡張に頼ることにしました。
@@ -25,8 +30,8 @@
 7. 自動でZennに投稿される
 ```
 ## Zenn CLIの導入とGithub連携
-Zennには`Zenn CLI`が用意されており、ローカルで作成・編集・プレビューを行なうことができます。
-さらにGithubと連携することでmainブランチ（設定可）に差分があると自動で投稿してくれます。  
+Zennには`Zenn CLI`が用意されており、ローカルで作成・編集・プレビューを行なうことができます。  
+さらにGithubと連携することでmainブランチ（設定可）に差分があると自動で投稿してくれます！  
 [Zenn CLI](https://zenn.dev/zenn/articles/install-zenn-cli)  
 [Github連携](https://zenn.dev/zenn/articles/connect-to-github)
 
@@ -40,9 +45,9 @@ npx zenn new:article
 ```
 
 ## Github Actionsでlinterを走らせる
-次にlinterの設定をしていきます。
+次にlinterの設定。  
 `textlint`というツールがあり、走らせることで書いた文章を自動でチェックしてくれます。  
-細かく校正のルールを設定できるのですが、SmartHRがプリセットのnpmパッケージを出しており、なんかよさそうだ！と思ったのでこちらを使用しました。  
+SmartHRが校正ルールプリセットのnpmパッケージを出しており、なんかよさそうだ！と思ったのでこちらを使用しました。  
 https://www.npmjs.com/package/textlint-rule-preset-smarthr
 
 またtextlintは`textlint-rule-prh`という表記揺れを防ぐ設定を行なうこともできます。  
@@ -50,7 +55,7 @@ https://www.npmjs.com/package/textlint-rule-preset-smarthr
 https://github.com/kufu/textlint-rule-preset-smarthr/tree/main/dict
 
 ## reviewdogを使う
-textlintの実行結果のログをみてその位置を追うのは辛いので、PRに自動でコメントがつくように`reviewdog`を使用しました。  
+textlintの実行結果のログをみてその位置を追うのは辛いので、PRに自動でコメントがつくように`reviewdog`を使用。  
 便利すぎ。  
 https://github.com/reviewdog/reviewdog
 
@@ -100,7 +105,7 @@ https://uraway.hatenablog.com/entry/2018/12/12/001545
 
 3. 記述
 
-4. git add して commit して push <- しなくてもいい
+4. git add して commit して push <- もはやしなくてもいい
 
 5. vscodeのコマンドパレットで投稿
 ```
@@ -131,7 +136,6 @@ package.json
  "lint-staged": {
    "*.{md}": [
      "yarn lint"
-     "yarn lint:fix"
    ]
  }
 ```
@@ -192,31 +196,27 @@ husky - pre-commit hook exited with code 1 (error)
 
 修正してcommitが通れば、あとはコマンドパレットから`Hatenablogger: Post or Update`を選択して投稿します。
 
-ちなみにこのエラー文は好きなように変更でき、下記のようにするとさらに指摘箇所が見やすくなります。
+ちなみにエラー文のフォーマットは好きなように変更でき、下記のようにして指摘箇所が見やすくなります。
 ```
 textlint -f pretty-error 'articles/*.md', 'hatena/*.md'
 ```
 
 ## git管理する意味ある？という懸念
-vscodeで完結するのでgit管理する意味がないように一瞬思いました。
+vscodeで完結するのでgit管理する意味がないように一瞬思いました。  
 ターミナルで`yarn lint`を実行すれば同じです。
 
-ただ私が使用するデバイスが複数あり、同期したい気持ちもありました。
+ただ私が使用するデバイスが複数あり、同期したい気持ちもありました。  
 そういった意味だとgithubに置いておけばpullするだけで環境が同期できて便利になります。
 
 # 振り返り
 「記事を書く環境がなんかモダンぽい！」という自己満もあるのですが、総じて良かったなと感じたことが２点あります。
 ## 下書きという概念がなくなった
-今まではObsidianで下書き -> WEBエディタにペースト、
-チェックして細かい修正があればその場対応、投稿という流れでした。  
-そのため下書きと実際の内容に差分が発生しており、あまりObsidianに記事を残す意味が感じられませんでした。  
-今回の方法だとvscodeで修正したものが本番のものと同じになります。
-Zennもはてなブログも、投稿・更新は自分の環境からになるのです。  
-（Obsidianは別用途で今も使い続けています。）
+今まではWEBエディタでチェックして細かい修正があればその場対で修正していたため、下書きと実際の内容に差分が発生しており、あまりObsidianに記事を残す意味が感じられませんでした。  
+今回の方法だとvscodeで修正したものが本番のものと同じになるので余計なファイルが存在しなくなります。
 
 ## vscodeで書く理由ができた
-markdownの記事はもちろん以前からvscodeで書けましたが、特にその理由はなく、いくつかのmarkdownツールを触ってきました。  
-今回`Zenn Editor`、`hatenablogger`の存在がvscodeと他のツールを差別化する起因となり、ここに落ち着くことができました。
+特にvscodeでmarkdownを書く理由はなく、これまでいくつかのmarkdownツールを触ってきました。  
+しかし`Zenn Editor`、`hatenablogger`の存在がvscodeと他のツールを差別化する起因となり、ここに落ち着くことができました。
 
 ---
 また改良を重ねるかもしれませんが、いい体験になることが期待できます。  
