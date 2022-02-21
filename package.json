@@ -12,10 +12,18 @@
     "zenn-cli": "^0.1.107"
   },
   "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.4",
     "textlint-rule-preset-ja-spacing": "^2.2.0"
   },
   "scripts": {
-    "lint": "textlint -f checkstyle 'articles/*.md', 'hatena/*.md'"
+    "lint": "textlint -f checkstyle 'articles/*.md', 'hatena/*.md'",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.md": [
+      "yarn lint"
+    ]
   },
   "repository": {
     "type": "git",
