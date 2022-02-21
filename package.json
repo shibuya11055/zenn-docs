@@ -17,11 +17,13 @@
     "textlint-rule-preset-ja-spacing": "^2.2.0"
   },
   "scripts": {
-    "lint": "textlint -f checkstyle 'articles/*.md', 'hatena/*.md'",
+    "lint": "textlint -f pretty-error 'articles/*.md', 'hatena/*.md'",
+    "lint:fix": "textlint --fix 'articles/*.md', 'hatena/*.md'",
     "prepare": "husky install"
   },
   "lint-staged": {
     "*.md": [
+      "yarn lint:fix",
       "yarn lint"
     ]
   },
