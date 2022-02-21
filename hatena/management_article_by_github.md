@@ -3,13 +3,10 @@
 特に不便に感じてはいませんでしたが、先日同僚のテックリードと雑談したところ、  
 「自分はZenn cliを使っていて、自動で投稿されるようにしています。」  
 「Github Actionsでtextlintを走らせて、自動で文章の校正をしています。」
-というお話をいただきました。  
-なにそれイケてる!!と思いすぐにその環境を導入した話です。
-
+というお話をいただき、なにそれイケてる!!と思いすぐにその環境を導入した話です。
 # Zennとはてなブログの使い分け
 技術的な話以外のことを書きたいときははてなブログを利用しています。  
 そのためどうせならどちらも管理したいな..というのを目指しましたが、結局はてなブログに関してはvscodeの拡張に頼ることにしました。
-
 # ZennをGithubで管理する
 この環境でブログを投稿するまでの流れは下記の通りです。
 ```
@@ -61,7 +58,7 @@ https://github.com/reviewdog/reviewdog
 まずはテストで「。」がない文章を投稿してみます。
 すると
 ![reviewdog](https://cdn-ak.f.st-hatena.com/images/fotolife/s/shibuya01055/20220220/20220220234334.png)
-しっかり自動でレビューが入りました👏
+しっかり自動でレビューが入りました。👏
 
 これを修正してマージすると・・・
 ![自動投稿](https://cdn-ak.f.st-hatena.com/images/fotolife/s/shibuya01055/20220220/20220220234551.png)
@@ -79,23 +76,21 @@ published: false # <-これ
 
 
 ## vscodeの拡張
-Zenn Editorという拡張も導入しました。
+Zenn Editorという拡張も導入しました。  
 書きながらとなりにプレビューを置けるので非常に便利です。
 https://marketplace.visualstudio.com/items?itemName=negokaz.zenn-editor
 
 # はてなブログを管理する
 次にはてなブログです。  
 githubと連携するには`push-to-hatenablog`を使うとよさそうでした。
-https://github.com/mm0202/push-to-hatenablog
-ただ`Docker`を利用する必要がありそうで、そこまででもないんだよな〜という感じがありました。
-
-## vscodeの拡張でpostできる
+https://github.com/mm0202/push-to-hatenablog  
+ただ`Docker`を利用する必要がありそうで、そこまででもないんだよな〜という感じがあり、使用を断念。
+## vscodeの拡張で投稿できる
 `hatenablogger`という拡張があり、これを使うことでvscode上から投稿できるとのこと！
 設定もお手軽なのでこちらを利用することにしました。
 https://uraway.hatenablog.com/entry/2018/12/12/001545
-
 ## textlintをpre-commitで実行する
-**(こちらの項で設定しているhuskyはreviewdogの良さを消してしまうため使用しないことにしました。もし使ってみたい方がいれば参考にしてみてください。)**
+**(こちらの項で設定しているhuskyはreviewdogの良さを消してしまうため使用しないことにしました。もし使ってみたい場合は参考にしてください。)**
 
 はてなブログの場合、Zennと投稿までの流れが変わります。
 ```
@@ -116,11 +111,11 @@ vscode上で完結するため、「CIが通ったらマージして~」とい�
 そこでhuskyを使用し、commit時に自動でtextlintを走らせるようにしました。  
 投稿するのは必ずcommitしてからという自分ルールを決めて・・・。  
 
-パッケージインストール
+パッケージをインストールします。
 ```
 yarn add -D husky lint-staged
 ```
-.huskyディレクトリ作成
+.huskyディレクトリ作成。
 ```
 yarn husky install
 ```
@@ -141,14 +136,14 @@ package.json
  }
 ```
 
-.husky/pre-commitを作成
+.husky/pre-commitを作成。
 ```
 yarn husky add .husky/pre-commit "yarn lint-staged"
 ```
 
 これでcommit時にtextlintが実行されるようになりました。  
 ちなみにこの記事を書き終えたときに実行されたものです。  
-めちゃくちゃ怒ってくれます🙏
+めちゃくちゃ怒ってくれます。🙏
 ```
 yarn run v1.22.4
 $ /Users/shibuya.kyohei/work2/zenn-docs/node_modules/.bin/lint-staged
@@ -197,7 +192,7 @@ husky - pre-commit hook exited with code 1 (error)
 
 修正してcommitが通れば、あとはコマンドパレットから`Hatenablogger: Post or Update`を選択して投稿します。
 
-ちなみにこのエラー文は好きなように変更することができ、下記のようにするとさらに指摘箇所が見やすくなります。
+ちなみにこのエラー文は好きなように変更でき、下記のようにするとさらに指摘箇所が見やすくなります。
 ```
 textlint -f pretty-error 'articles/*.md', 'hatena/*.md'
 ```
@@ -226,3 +221,8 @@ markdownの記事はもちろん以前からvscodeで書けましたが、特に
 ---
 また改良を重ねるかもしれませんが、いい体験になることが期待できます。  
 あとGithubに草も生えるしなんかいいよね。
+
+# 追記
+最終的にlinterの実行はhuskyを使わずに全てreviewdogに任せることにしました。  
+自動でレビューされた内容をvscodeの拡張、[GitHub Pull Requests and Issues](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)を使って修正時に怒られている箇所を特定しやすくしています（画像は修正して「。」を入れた後）。
+![スクリーンショット 2022-02-21 15.27.59.png](https://cdn-ak.f.st-hatena.com/images/fotolife/s/shibuya01055/20220221/20220221153925.png)
