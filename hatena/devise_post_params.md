@@ -48,4 +48,4 @@ Rails.application.routes.draw do
 end
 ```
 
-これで`session`というパラメータが入ることなく、`email`と`password`でログインすることができました。
+これで`session`というパラメータが入ることなく、`email`と`password`でログインできました。
