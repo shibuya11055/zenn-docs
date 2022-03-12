@@ -14,14 +14,11 @@ jobs:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
           level: warning
-          textlint_flags:
-            - "articles/**"
+          textlint_flags: "articles/**"
       - name: textlint-github-pr-review-hatena
         uses: tsuyoshicho/action-textlint@v3
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
           level: warning
-          textlint_flags:
-            - "hatena/**"
-    
+          textlint_flags: "hatena/**"
