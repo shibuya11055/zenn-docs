@@ -210,16 +210,16 @@ rules:
   - expected: 差し戻し
     pattern:
       - 差戻し
-  - expected: 行なう
-    pattern:
-      - 行う
-      - おこなう
-    prh: 「行なう」を使用する
-    specs:
-      - from: 行う
-        to: 行なう
-      - from: おこなう
-        to: 行なう
+  # - expected: 行なう
+  #   pattern:
+  #     - 行う
+  #     - おこなう
+  #   prh: 「行なう」を使用する
+  #   specs:
+  #     - from: 行う
+  #       to: 行なう
+  #     - from: おこなう
+  #       to: 行なう
   - expected: 何卒
     pattern:
       - 何とぞ
