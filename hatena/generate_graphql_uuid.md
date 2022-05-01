@@ -1,5 +1,5 @@
 <!--
-{"id":"13574176438087897577","title":"GraphQL Rubyで型を生成するとスキーマ上uuidであればちゃんとuuid型を参照しようとする","categories":["tech Rails GraphQL"],"updated":"2022-05-01T01:55:43+09:00","edited":"2022-05-01T01:55:46+09:00","draft":"no"}
+{"id":"13574176438087897577","title":"GraphQL Rubyで型を生成するとスキーマ上uuidであればちゃんとuuid型を参照しようとする","categories":["tech Rails GraphQL"],"updated":"2022-05-01T01:55:43+09:00","edited":"2022-05-01T01:58:22+09:00","draft":"no"}
 -->
 
 RailsでGraphQLを使っているのですが、Typeを自動生成するときに妙な問題に出くわした。
