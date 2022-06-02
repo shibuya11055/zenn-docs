@@ -1,5 +1,5 @@
 <!--
-{"id":"13574176438098123879","title":"GraphQL Mutationのテストにて、整数な引数が型エラーで怒られた","categories":["rails","   tech","   GraphQL"],"updated":"2022-06-02T01:17:13+09:00","edited":"2022-06-02T01:21:20+09:00","draft":"no"}
+{"id":"13574176438098123879","title":"GraphQL Mutationのテストにて、整数な引数が型エラーで怒られた","categories":["rails","    tech","    GraphQL"],"updated":"2022-06-02T01:17:13+09:00","edited":"2022-06-02T01:23:33+09:00","draft":"no"}
 -->
 
 RspecでGraphQLのmutationを叩いたときに問題が発生したのでメモ。
